@@ -106,7 +106,7 @@ export function Pairing() {
                   }}
                 />
               </p>
-              <div className="text-8xl font-bold text-center p-6 font-dancing-script">
+              <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-center p-4 sm:p-6 font-dancing-script break-words">
                 {assignment[1].name}
               </div>
               {(instructions || assignment[1].hint) && (
