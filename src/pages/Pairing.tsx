@@ -1,30 +1,38 @@
 import "@fontsource/dancing-script/700.css";
-import { useEffect, useState } from 'react';
-import { useSearchParams, Link } from 'react-router-dom';
-import { decryptText } from '../utils/crypto';
-import { PostCard } from '../components/PostCard';
-import { Trans, useTranslation } from 'react-i18next';
-import { MenuItem, SideMenu } from '../components/SideMenu';
-import { PageTransition } from '../components/PageTransition';
-import { ArrowLeft, Info } from '@phosphor-icons/react';
-import { motion } from 'framer-motion';
-import CryptoJS from 'crypto-js';
+import { useEffect, useState } from "react";
+import { useSearchParams, Link } from "react-router-dom";
+import { decryptText } from "../utils/crypto";
+import { PostCard } from "../components/PostCard";
+import { Trans, useTranslation } from "react-i18next";
+import { MenuItem, SideMenu } from "../components/SideMenu";
+import { ArrowLeft, Info } from "@phosphor-icons/react";
+import { motion } from "framer-motion";
+import CryptoJS from "crypto-js";
 import { Layout } from "../components/Layout";
 import { ReceiverData } from "../types";
 
-async function loadPairing(searchParams: URLSearchParams): Promise<[string, ReceiverData]> {
+async function loadPairing(
+  searchParams: URLSearchParams
+): Promise<[string, ReceiverData]> {
   // Legacy pairings, not generated anymore; remove after 2025-01-01
-  if (searchParams.has(`name`) && searchParams.has(`key`) && searchParams.has(`pairing`)) {
+  if (
+    searchParams.has(`name`) &&
+    searchParams.has(`key`) &&
+    searchParams.has(`pairing`)
+  ) {
     const name = searchParams.get(`name`)!;
     const key = searchParams.get(`key`)!;
     const pairing = searchParams.get(`pairing`)!;
 
-    return [name, {name: CryptoJS.AES.decrypt(pairing, key).toString(CryptoJS.enc.Utf8)}];
+    return [
+      name,
+      { name: CryptoJS.AES.decrypt(pairing, key).toString(CryptoJS.enc.Utf8) },
+    ];
   }
 
   if (searchParams.has(`to`)) {
-    const from = searchParams.get('from')!;
-    const to = searchParams.get('to')!;
+    const from = searchParams.get("from")!;
+    const to = searchParams.get("to")!;
     const decrypted = await decryptText(to);
 
     try {
@@ -33,7 +41,7 @@ async function loadPairing(searchParams: URLSearchParams): Promise<[string, Rece
       return [from, data];
     } catch {
       // If parsing fails, it's the old format (just the name)
-      return [from, {name: decrypted, hint: undefined} as ReceiverData];
+      return [from, { name: decrypted, hint: undefined } as ReceiverData];
     }
   }
 
@@ -45,17 +53,19 @@ export function Pairing() {
   const [searchParams] = useSearchParams();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [assignment, setAssignment] = useState<[string, ReceiverData] | null>(null);
+  const [assignment, setAssignment] = useState<[string, ReceiverData] | null>(
+    null
+  );
   const [instructions, setInstructions] = useState<string | null>(null);
 
   useEffect(() => {
     const decryptReceiver = async () => {
       try {
         setAssignment(await loadPairing(searchParams));
-        setInstructions(searchParams.get('info'));
+        setInstructions(searchParams.get("info"));
       } catch (err) {
-        console.error('Decryption error:', err);
-        setError(t('pairing.error'));
+        console.error("Decryption error:", err);
+        setError(t("pairing.error"));
       } finally {
         setLoading(false);
       }
@@ -72,31 +82,27 @@ export function Pairing() {
     );
   }
 
-  const menuItems = [
-    <MenuItem key={`back`} to="/" icon={<ArrowLeft weight={`bold`}/>}>
-      {t('pairing.startYourOwn')}
-    </MenuItem>
-  ];
-
   return (
-    <Layout menuItems={menuItems}>
+    <Layout>
       <div>
         {!loading && assignment && (
           <motion.div
             initial={{ rotateZ: -360 * 1, scale: 0 }}
             animate={{ rotateZ: 0, scale: 1, opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ ease: `easeIn`, duration: .6 }}
+            transition={{ ease: `easeIn`, duration: 0.6 }}
           >
             <PostCard>
               <h1 className="text-3xl font-bold mb-6 text-center text-red-700">
-                {t('pairing.title')}
+                {t("pairing.title")}
               </h1>
               <p className="mb-6 text-center text-gray-600">
                 <Trans
                   i18nKey="pairing.assignment"
                   components={{
-                    name: <span className="font-semibold">{assignment![0]}</span>
+                    name: (
+                      <span className="font-semibold">{assignment![0]}</span>
+                    ),
                   }}
                 />
               </p>
@@ -106,7 +112,7 @@ export function Pairing() {
               {(instructions || assignment[1].hint) && (
                 <div className="mt-6 flex p-4 bg-gray-50 rounded-lg leading-6 text-gray-600 whitespace-pre-wrap">
                   <div className="mr-4">
-                    <Info size={24}/>
+                    <Info size={24} />
                   </div>
                   <div className="space-y-2">
                     {assignment[1].hint && <p>{assignment[1].hint}</p>}
