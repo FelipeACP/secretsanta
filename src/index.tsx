@@ -11,6 +11,7 @@ import {
 } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { Pairing } from "./pages/Pairing";
+import { GiftSuggestions } from "./pages/GiftSuggestions";
 import { useEffect } from "react";
 
 function Redirect({ to }: { to: string }) {
@@ -32,6 +33,10 @@ const router = createHashRouter([
   {
     path: "/pairing",
     element: <Pairing />,
+  },
+  {
+    path: "/gift-suggestions",
+    element: <GiftSuggestions />,
   },
   {
     path: "/pairing.html",

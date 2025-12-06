@@ -85,4 +85,18 @@ export const pt = {
     instructionsHelp:
       "Serão exibidas para todos os participantes na página de atribuição. Mantenha curto: aumenta o tamanho dos links.",
   },
+  giftSuggestions: {
+    menuTitle: "Sugestões de Presentes",
+    pageTitle: "Sugestões de Presentes",
+    loading: "Carregando sugestões...",
+    error: "Erro ao carregar as sugestões. Tente novamente mais tarde.",
+    retryButton: "Tentar Novamente",
+    emptyList: "Nenhuma sugestão de presente disponível no momento.",
+    tablePerson: "Pessoa",
+    tableGift: "Presente",
+    tableDetails: "Detalhes",
+    tableLink: "Link",
+    buyButton: "Comprar",
+    viewLink: "Ver Link",
+  },
 };
