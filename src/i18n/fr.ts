@@ -101,5 +101,7 @@ export const fr: Translations = {
     tableLink: "Lien",
     buyButton: "Acheter",
     viewLink: "Voir le Lien",
+    searchPlaceholder: "Rechercher par nom...",
+    noResults: "Aucun résultat trouvé pour votre recherche.",
   },
 };

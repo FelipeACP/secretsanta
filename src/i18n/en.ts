@@ -95,5 +95,7 @@ export const en = {
     tableLink: "Link",
     buyButton: "Buy",
     viewLink: "View Link",
+    searchPlaceholder: "Search by name...",
+    noResults: "No results found for your search.",
   },
 };

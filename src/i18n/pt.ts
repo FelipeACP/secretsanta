@@ -98,5 +98,7 @@ export const pt = {
     tableLink: "Link",
     buyButton: "Comprar",
     viewLink: "Ver Link",
+    searchPlaceholder: "Buscar por nome...",
+    noResults: "Nenhum resultado encontrado para sua busca.",
   },
 };

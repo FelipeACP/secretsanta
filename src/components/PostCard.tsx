@@ -9,16 +9,16 @@ interface PostCardProps {
 export function PostCard({ children, className = "" }: PostCardProps) {
   return (
     <div
-      className={`shadow-md relative z-10 transform rotate-2 transition-transform duration-300 p-2 sm:p-3 bg-postcard rounded-lg ${className}`}
+      className={`shadow-md relative z-10 transform transition-transform duration-300 p-2 sm:p-3 bg-postcard rounded-lg w-full ${className}`}
     >
-      <div className="relative p-4 sm:p-6 md:p-8 bg-white">
-        <div className="absolute -top-4 -left-4 sm:-top-6 sm:-left-6 w-10 h-10 sm:w-12 sm:h-12 bg-[#5CC48A] rounded-full flex items-center justify-center transform -rotate-12">
+      <div className="relative p-4 sm:p-6 md:p-8 bg-white rounded-md overflow-hidden">
+        <div className="absolute -top-3 -left-3 sm:-top-6 sm:-left-6 w-8 h-8 sm:w-12 sm:h-12 bg-[#5CC48A] rounded-full flex items-center justify-center transform -rotate-12 shadow-sm">
           <img className={`w-full h-full`} src={christmasWreath} />
         </div>
 
-        {children}
+        <div className="min-w-0 w-full">{children}</div>
 
-        <div className="absolute -bottom-4 -right-4 sm:-bottom-6 sm:-right-6 w-10 h-10 sm:w-12 sm:h-12 bg-[#EF3D3D] rounded-full flex items-center justify-center transform rotate-12">
+        <div className="absolute -bottom-3 -right-3 sm:-bottom-6 sm:-right-6 w-8 h-8 sm:w-12 sm:h-12 bg-[#EF3D3D] rounded-full flex items-center justify-center transform rotate-12 shadow-sm">
           <img className={`w-full h-full`} src={giftBox} />
         </div>
       </div>
